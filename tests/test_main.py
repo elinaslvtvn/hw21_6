@@ -55,18 +55,25 @@ def test_find_suitable_user():
 
     # TODO найдите пользователя с именем "Olga"
     suitable_users = None
+
+    for user in users:
+        if user['name'] == 'Olga':
+            suitable_users = user
+            print(suitable_users)
     assert suitable_users == {"name": "Olga", "age": 45}
 
     # TODO найдите всех пользователей младше 20 лет
-    suitable_users = None
+    suitable_users = []
+    for user in users:
+        if user['age'] < 20:
+            suitable_users.append(user)
+            print(user)
     assert suitable_users == [
         {"name": "Stanislav", "age": 15},
         {"name": "Maria", "age": 18},
     ]
 
-
-# Сделайте функцию, которая будет печатать
-# читаемое имя переданной ей функции и значений аргументов.
+# Сделайте функцию, которая будет печатать читаемое имя переданной ей функции и значений аргументов.
 # Вызовите ее внутри функций, описанных ниже
 # Подсказка: Имя функции можно получить с помощью func.__name__
 # Например, вызов следующей функции должен преобразовать имя функции
@@ -75,6 +82,17 @@ def test_find_suitable_user():
 # >>> open_browser(browser_name="Chrome")
 # "Open Browser [Chrome]"
 
+# def print_func_name(func, *args):
+#     func_name = func.__name__.replace('_', ' ').title()
+#     arg_name = ", ".join([*args])
+#     print (f'{func_name} [{arg_name}]')
+
+def print_func_name_args(func, *args):
+    func_name = func.__name__.replace('_', ' ').title()
+    args_str = ", ".join(map(str, args))
+    result = f"{func_name} [{args_str}]"
+    print(f"\n{result}")
+    return result
 
 def test_readable_function():
     open_browser(browser_name="Chrome")
@@ -85,6 +103,7 @@ def test_readable_function():
 def open_browser(browser_name):
     actual_result = None
     assert actual_result == "Open Browser [Chrome]"
+
 
 
 def go_to_companyname_homepage(page_url):
